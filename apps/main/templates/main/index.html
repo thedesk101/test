@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Belt Review</title>
+</head>
+<body>
+	<div>
+	 
+ 		<h2>Register</h2>
+ 		<form action="/users" method="post">
+ 		{% csrf_token %}
+ 			<div>
+ 			 <label>Name</label>	
+ 			 <input type="text" name="name">
+ 			</div>
+ 			<div>
+ 			 <label>Email</label>
+ 			 <input type="text" name="email">	
+ 			</div>
+ 			<div>
+ 				<label>Password</label>
+ 				<input type="password" name="password">
+ 			</div>
+ 			<div>
+ 				<label>Password Confirmation</label>
+ 				<input type="password" name="password_confirmation">
+ 			<div>
+ 			<div>
+ 				<label>Date of Birth</label>
+ 				<input type="date" name="dob">
+ 				
+ 			</div>
+ 				
+ 			</div>	
+ 				<input type="submit" value="Register">
+ 			</div>
+
+ 			
+ 		</form>
+	</div>
+
+	<div class="container">
+	 <h3>Login</h3>
+	 <form action="/sessions" method="post">
+	  {% csrf_token %}
+	  <div>
+	  	<label>Email</label>
+	  	<input type="text" name="email">
+	  </div>	
+	  <div>
+	  	<label>Password</label>
+	  	<input type="password" name="password">
+	  </div>	
+	  <div>
+	  	<input type="submit" value="Login">
+	  
+	  </div>
+	 </form>
+	 {% if messages %}
+	 	{% for message in messages %}
+	 	 <p class="error">{{message}}</p>
+	 	{% endfor %}
+	 {% endif %}	 
+		
+	</div>
+
+
+</body>
+</html>
