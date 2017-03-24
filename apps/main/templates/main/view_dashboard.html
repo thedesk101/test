@@ -4,7 +4,56 @@
 	<title></title>
 </head>
 <body>
-	<h3>Welcome, {{current_user.name}}</h3>
+	<h1>Welcome, {{current_user.name}}</h1>
+    <a href="/logout">Logout</a>
+    <h3>Quotable Quotes</h3>
+    {%if quotes%}
+    {% for quote in quotes%}
+    <div>
+      {{quote.author}}: {{quote.message}}
+      <br>
+      <p>Posted By: <a href="users/{{quote.user.id}}">{{quote.user.name}}</a></p>
+      <button type="button" name="button"><a href="favorites/{{quote.id}}">Add to My List</a></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <h3>Your Favorites</h3>
+    {%if favorites%}
+    {%for favorite in favorites%}
+    <div>
+      {{favorite.quote.author}}: {{favorite.quote.message}}
+      <br>
+      <p>Posted By: <a href="users/{{favorite.quote.user.id}}">{{favorite.quote.user.name}}</a></p>
+      <button type="button" name="button"><a href="remove/{{favorite.quote.id}}">Remove from My List</a></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+
+    <h3>Contribute a Quote:</h3>
+    <form action="/contrib_quote" method="post">
+      {% csrf_token %}
+      <div>
+        <label for="author">Quote By: </label>
+        <input type="text" name="author" value="">
+        <br>
+      </div>
+      <div>
+        <label for="message">Message: </label>
+        <textarea name="message" rows="9" cols="60"></textarea>
+        <br>
+      </div>
+      <input type="submit" name="submit" value="Submit">
+      {% if messages %}
+      <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+    </form>
+	
 
 </body>
 </html>
